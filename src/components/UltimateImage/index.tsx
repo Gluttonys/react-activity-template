@@ -28,7 +28,7 @@ const UltimateImage: React.FC<UltimateImageProps> = (props) => {
 
     imageDom.setAttribute('src', miniSource);
 
-    new Promise((resolve) => {
+    new Promise<HTMLImageElement>((resolve) => {
       imageDom.onload = () => {
         resolve(imageDom);
         setLocalSrc(miniSource);
@@ -38,8 +38,8 @@ const UltimateImage: React.FC<UltimateImageProps> = (props) => {
     })
       .then((imageDom) => {
         if (source !== undefined) {
-          (imageDom as HTMLImageElement).setAttribute('src', source);
-          (imageDom as HTMLImageElement).onload = () => setLocalSrc(source);
+          imageDom.setAttribute('src', source);
+          imageDom.onload = () => setLocalSrc(source);
         }
       })
       .catch(console.error)
